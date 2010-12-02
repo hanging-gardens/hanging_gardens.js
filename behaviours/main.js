@@ -1,3 +1,5 @@
 var $ = require("vendor/jquery");
 
-$("body").append("<p>Hello Anais</p>");
+$(function(){
+  $("body").append("<p>Hello Anais</p>");
+});
