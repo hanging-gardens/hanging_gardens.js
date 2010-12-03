@@ -10,7 +10,7 @@ A lot of effort is put in making JavaScript based RIA development easier. This i
 
 ### How does it work
 
-A new Hanging Gardens project contains four directories (behaviours, helpers, widgets and vendor) and `Gardenfile.js`. Here is an explanation of what should go in each directory or file.
+A new Hanging Gardens project contains four directories (behaviours, helpers, widgets and vendor) and a `Gardenfile.js` file. Here is an explanation of what should go in each directory or file.
 
 * `behaviours`: contains files with code that makes a webpage or parts thereof
   behave in a certain way. Think of these as controllers (as in MVC).
@@ -41,6 +41,33 @@ This will build the `Gardenfile.compiled.js` file.
     cd hanging_gardens.js
     garden example/Gardenfile.js
 
+## The `Gardenfile.js`
+
+The `Gardenfile.js` file specifies what files need to be processed and how they need to be processed.
+
+### General usage
+
+Each file type (behaviours, helpers, widgets and vendor) has its own configuration function.
+
+    behaviours([
+      'navigation' // behaviours/navigation.js
+      ]);
+    
+    helpers([
+      'base64'     // helpers/base64.js
+      ]);
+    
+    widgets([
+      'table'      // widgets/table.js
+      ]);
+    
+    vendor({
+      // vendor/jquery.js wrapped in the provided snippet. (__GARDEN_MODULE__
+      // gets replaced with the content of vendor/jquery.js)
+      'jquery': '__GARDEN_MODULE__ ; exports = window.jQuery;'
+      });
+
+Do note that the `vendor` configuration function is different from the others as it supports passing a wrapper snippet. The wrapper snippet is needed sometimes to shoehorn a library into the Hanging Gardens structure. When you don't want to use a wrapper snippet you can just pass `false` instead.
 
 ### How to enable JSLint
 
