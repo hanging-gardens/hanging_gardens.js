@@ -23,7 +23,7 @@ A new Hanging Gardens projects contains four directories (behaviours, helpers, w
 * `Gardenfile.js`: is sort of like a manifest. It tells Hanging Gardens which
   files need to be packaged.
 
-Take a look at the [example](example) for more information.
+Take a look at the [example][example] for more information.
 
 
 ### Installation
