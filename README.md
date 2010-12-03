@@ -44,18 +44,18 @@ This will build the `Gardenfile.compiled.js` file.
 
 ### How to enable JSLint
 
-First you need to have JSLint installed (on OSX: `brew install jslint`). Then in jour `Gardenfile.js` Added the following line:
+First you need to have JSLint installed (on OSX: `brew install jslint`). Then in your `Gardenfile.js` add the following line:
 
     lint();
 
-If you don't want to process dome files with JSLint you can add a `skip` option.
+If you don't want to process some files with JSLint you can use the `skip` option.
 
     lint({ skip: ['vendor/jquery'] });
 
 
 ### How to enable YUI Compressor
 
-You need to have YUI Compressor installed (on OSX: `brew install yuicompressor`). Then in jour `Gardenfile.js` Added the following line:
+You need to have YUI Compressor installed (on OSX: `brew install yuicompressor`). Then in your `Gardenfile.js` add the following line:
 
     yuicompressor();
 
