@@ -28,6 +28,8 @@ Take a look at the [example][example] for more information.
 
 ### Installation
 
+Make sure you have Node.js and NPM installed (on OSX: `brew install npm`).
+
     npm install hanging-gardens
 
 
@@ -38,6 +40,17 @@ This will build the `Gardenfile.compiled.js` file.
     git clone git://github.com/fd/hanging_gardens.js.git
     cd hanging_gardens.js
     garden example/Gardenfile.js
+
+
+### How to enable JSLint
+
+First you need to have JSLint installed (on OSX: `brew install jslint`). Then in jour `Gardenfile.js` Added the following line:
+
+    lint();
+
+If you don't want to process dome files with JSLint you can add a `skip` option.
+
+    lint({ skip: ['vendor/jquery'] });
 
 
   [example]: https://github.com/fd/hanging_gardens.js/tree/master/example/
