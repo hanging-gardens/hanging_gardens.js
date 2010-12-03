@@ -1,0 +1,21 @@
+{
+    "name":         "hanging-gardens",
+    "description":  "A JavaScript project structure for NoRIA webpages.",
+    "keywords":     ["javascript", "language", "compiler", "packager", "validator"],
+    "author":       "Simon Menke",
+    "version":      "0.0.1",
+    "licenses":     [{
+      "type": "MIT",
+      "url":  "https://github.com/fd/hanging_gardens.js/blob/master/LICENSE"
+    }],
+    "engines":      {
+      "node":       ">=0.2.4"
+    },
+    "directories" : {
+      "lib" : "./lib"
+    },
+    "main" : "./lib/hanging_gardens",
+    "bin":          {
+      "garden":     "./bin/garden"
+    }
+}

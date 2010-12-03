@@ -33,5 +33,5 @@ Take a look at the [example](example) for more information.
     bin/garden example/Gardenfile.js
 
 
-  [example]: /fd/haging_gardens.js/tree/master/example/
+  [example]: https://github.com/fd/hanging_gardens.js/tree/master/example/
 
