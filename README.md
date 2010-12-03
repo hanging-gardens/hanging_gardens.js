@@ -53,5 +53,12 @@ If you don't want to process dome files with JSLint you can add a `skip` option.
     lint({ skip: ['vendor/jquery'] });
 
 
+### How to enable YUI Compressor
+
+You need to have YUI Compressor installed (on OSX: `brew install yuicompressor`). Then in jour `Gardenfile.js` Added the following line:
+
+    yuicompressor();
+
+
   [example]: https://github.com/fd/hanging_gardens.js/tree/master/example/
 
