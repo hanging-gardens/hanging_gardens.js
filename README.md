@@ -10,7 +10,7 @@ Allot of effort is put in making JavaScript based RIA development easier. This i
 
 ### How does it work
 
-A new Hanging Gardens projects contains four directories (behaviours, helpers, widgets and vendor) and Gardenfile.js. Here is en explanation of what should go in each directory or file.
+A new Hanging Gardens projects contains four directories (behaviours, helpers, widgets and vendor) and `Gardenfile.js`. Here is en explanation of what should go in each directory or file.
 
 * `behaviours`: contains files with code that makes a webpage or parts thereof
   behave in a certain way. Think of these as controllers (as in MVC).
@@ -26,11 +26,18 @@ A new Hanging Gardens projects contains four directories (behaviours, helpers, w
 Take a look at the [example](example) for more information.
 
 
+### Installation
+
+    npm install hanging-gardens
+
+
 ### Building the example
+
+This will build the `Gardenfile.compiled.js` file.
 
     git clone git://github.com/fd/hanging_gardens.js.git
     cd hanging_gardens.js
-    bin/garden example/Gardenfile.js
+    garden example/Gardenfile.js
 
 
   [example]: https://github.com/fd/hanging_gardens.js/tree/master/example/
