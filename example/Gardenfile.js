@@ -1,8 +1,8 @@
 vendor({
-  'jquery': '__GARDEN_MODULE__ ; exports = jQuery;'
+  'jquery': '__GARDEN_MODULE__ ; exports = window.jQuery;'
   });
 
-behaviours([
-  'main',
-  'hello'
-  ]);
+behaviours(
+[ 'index'
+, 'hello'
+]);

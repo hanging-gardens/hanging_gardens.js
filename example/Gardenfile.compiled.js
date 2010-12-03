@@ -1,3 +1,50 @@
+(function(modules){
+
+  var require
+  ,   normalize_path
+  ,   boot
+  ;
+
+  require = function(path){
+    path = normalize_path(path);
+
+    var module = modules[path];
+
+    if (!module) {
+      throw('Unknown module: '+path);
+    }
+
+    if (!module.evaled) {
+      var ctx = { "exports": {}
+                , "require": require
+                }
+      ;
+
+      module['container'](ctx);
+      module.evaled  = true;
+      module['exports'] = ctx['exports'];
+    }
+
+    return module['exports'];
+  };
+
+  boot = function(){
+    if (modules['behaviours/index.js']) {
+      require('behaviours/index.js');
+    }
+  };
+
+  normalize_path = function(path){
+    path = path.replace(/(\.js)?$/, '.js');
+    path = path.replace(/\/\//g, '/');
+    path = path.replace(/^\.\//, '');
+    return path;
+  };
+
+  boot();
+
+})({"vendor/jquery.js":{"container":(function(module){ var exports = module["exports"], require = module["require"]; 
+
 /*!
  * jQuery JavaScript Library v1.4.4
  * http://jquery.com/
@@ -1808,7 +1855,7 @@ var rnamespaces = /\.(.*)$/,
 	rspace = / /g,
 	rescape = /[^\w\s.|`]/g,
 	fcleanup = function( nm ) {
-		return nm.replace(rescape, "\\$&");
+		return nm.replace(rescape, "\\__GARDEN_MODULE__");
 	},
 	focusCounts = { focusin: 0, focusout: 0 };
 
@@ -7177,3 +7224,19 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 
 
 })(window);
+ ; exports = window.jQuery;
+ ; module["exports"] = exports; })},
+"behaviours/index.js":{"container":(function(module){ var exports = module["exports"], require = module["require"]; 
+var $ = require("vendor/jquery");
+
+$(function(){
+  require('behaviours/hello');
+
+  $("body").append("<p>Hello Anais</p>");
+});
+ ; module["exports"] = exports; })},
+"behaviours/hello.js":{"container":(function(module){ var exports = module["exports"], require = module["require"]; 
+var $ = require("vendor/jquery");
+
+$("body").append("<p>Hello World</p>");
+ ; module["exports"] = exports; })}});
