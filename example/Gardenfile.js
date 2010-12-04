@@ -1,4 +1,5 @@
 lint({ skip: ['vendor/jquery'] });
+// lint();
 yuicompressor();
 
 vendor({
@@ -8,4 +9,5 @@ vendor({
 behaviours(
 [ 'index'
 , 'hello'
+, 'bye'
 ]);

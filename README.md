@@ -5,7 +5,7 @@ A JavaScript project structure for NoRIA webpages.
 
 ### Philosophy
 
-A lot of effort is put in making JavaScript based RIA development easier. This is a good thing for RIAs. But NonRIA development, development of regular webpages, still feels like we are stuck in 1995. Sure, we have great libraries like jQuery and MooTools but we still treat our .js files like a bunch of hacks. I don't like hacks so I decided to make something that encourages us, developers, to start taking JavaScript coding serious. This was the birth of Hanging Gardens. Hanging Gardens provides an infrastructure to load js code (like you would load Ruby or PHP code) and it turns many small (and well structured) js files into one (often huge) file. This file can then be further optimized by Googles Closure Compiler or JSMin.
+A lot of effort is put in making JavaScript based RIA development easier. This is a good thing for RIAs. But NonRIA development, development of regular webpages, still feels like we are stuck in 1995. Sure, we have great libraries like [jQuery][jquery] and [MooTools][mootools] but we still treat our .js files like a bunch of hacks. I don't like hacks so I decided to make something that encourages us, developers, to start taking JavaScript coding serious. This was the birth of Hanging Gardens. Hanging Gardens provides an infrastructure to load js code (like you would load Ruby or PHP code) and it turns many small (and well structured) js files into one (often huge) file. This file can then be further optimized by Googles Closure Compiler or JSMin.
 
 
 ### How does it work
@@ -28,7 +28,7 @@ Take a look at the [example][example] for more information.
 
 ### Installation
 
-Make sure you have Node.js and NPM installed (on OSX: `brew install npm`).
+Make sure you have [Node.js][nodejs] and [NPM][npm] installed (on OSX: `brew install npm`).
 
     npm install hanging-gardens
 
@@ -52,26 +52,26 @@ Each file type (behaviours, helpers, widgets and vendor) has its own configurati
     behaviours([
       'navigation' // behaviours/navigation.js
       ]);
-    
+
     helpers([
       'base64'     // helpers/base64.js
       ]);
-    
+
     widgets([
       'table'      // widgets/table.js
       ]);
-    
+
     vendor({
       // vendor/jquery.js wrapped in the provided snippet. (__GARDEN_MODULE__
       // gets replaced with the content of vendor/jquery.js)
       'jquery': '__GARDEN_MODULE__ ; exports = window.jQuery;'
       });
 
-Do note that the `vendor` configuration function is different from the others as it supports passing a wrapper snippet. The wrapper snippet is needed sometimes to shoehorn a library into the Hanging Gardens structure. When you don't want to use a wrapper snippet you can just pass `false` instead.
+Do note that the `vendor` configuration function is different from the others as it supports passing a wrapper snippet. The wrapper snippet is sometimes needed to shoehorn a library into the Hanging Gardens structure. When you don't want to use a wrapper snippet you can just pass `false` instead.
 
 ### How to enable JSLint
 
-First you need to have JSLint installed (on OSX: `brew install jslint`). Then in your `Gardenfile.js` add the following line:
+First you need to have [JSLint][jslint] installed (on OSX: `brew install jslint`). Then in your `Gardenfile.js` add the following line:
 
     lint();
 
@@ -82,10 +82,22 @@ If you don't want to process some files with JSLint you can use the `skip` optio
 
 ### How to enable YUI Compressor
 
-You need to have YUI Compressor installed (on OSX: `brew install yuicompressor`). Then in your `Gardenfile.js` add the following line:
+You need to have [YUI Compressor][yuicomp] installed (on OSX: `brew install yuicompressor`). Then in your `Gardenfile.js` add the following line:
 
     yuicompressor();
 
 
-  [example]: https://github.com/fd/hanging_gardens.js/tree/master/example/
+### How to use Coffee Script
+
+Make sure you have [Coffee Script][coffee] installed (`npm install coffee-script`). Then you can just create `.coffee` files.
+
+
+  [example]:  https://github.com/fd/hanging_gardens.js/tree/master/example/
+  [coffee]:   http://jashkenas.github.com/coffee-script/
+  [jslint]:   http://www.jslint.com/
+  [yuicomp]:  http://developer.yahoo.com/yui/compressor/
+  [jquery]:   http://jquery.com/
+  [mootools]: http://mootools.net/
+  [nodejs]:   http://nodejs.org/
+  [npm]:      http://npmjs.org/
 
