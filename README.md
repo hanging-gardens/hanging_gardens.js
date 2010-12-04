@@ -52,22 +52,22 @@ Each file type (behaviours, helpers, widgets and vendor) has its own configurati
     behaviours([
       'navigation' // behaviours/navigation.js
       ]);
-    
+
     helpers([
       'base64'     // helpers/base64.js
       ]);
-    
+
     widgets([
       'table'      // widgets/table.js
       ]);
-    
+
     vendor({
       // vendor/jquery.js wrapped in the provided snippet. (__GARDEN_MODULE__
       // gets replaced with the content of vendor/jquery.js)
       'jquery': '__GARDEN_MODULE__ ; exports = window.jQuery;'
       });
 
-Do note that the `vendor` configuration function is different from the others as it supports passing a wrapper snippet. The wrapper snippet is needed sometimes to shoehorn a library into the Hanging Gardens structure. When you don't want to use a wrapper snippet you can just pass `false` instead.
+Do note that the `vendor` configuration function is different from the others as it supports passing a wrapper snippet. The wrapper snippet is sometimes needed to shoehorn a library into the Hanging Gardens structure. When you don't want to use a wrapper snippet you can just pass `false` instead.
 
 ### How to enable JSLint
 
@@ -85,6 +85,11 @@ If you don't want to process some files with JSLint you can use the `skip` optio
 You need to have YUI Compressor installed (on OSX: `brew install yuicompressor`). Then in your `Gardenfile.js` add the following line:
 
     yuicompressor();
+
+
+### How to use Coffee Script
+
+Make sure you have Coffee Script installed (`npm install coffee-script`). Then you can just create `.coffee` files.
 
 
   [example]: https://github.com/fd/hanging_gardens.js/tree/master/example/
