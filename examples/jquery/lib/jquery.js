@@ -1,3 +1,7 @@
+var window   = require("browser/window")
+,   location = require("browser/location")
+;
+
 /*!
  * jQuery JavaScript Library v1.4.4
  * http://jquery.com/
@@ -7177,3 +7181,7 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 
 
 })(window);
+
+jQuery.noConflict();
+delete window["jQuery"];
+exports = jQuery;

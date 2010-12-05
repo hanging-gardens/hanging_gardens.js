@@ -1,0 +1,7 @@
+{ "name":    "jquery"
+, "version": "1.4.4"
+, "main":    "./lib/jquery"
+, "hanging-gardens" :
+  { "lint": false
+  }
+}

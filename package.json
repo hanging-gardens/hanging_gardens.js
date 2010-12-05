@@ -17,5 +17,9 @@
     "main" : "./lib/hanging_gardens",
     "bin":          {
       "garden":     "./bin/garden"
+    },
+    "repository": {
+        "type":"git",
+        "url":"http://github.com/fd/hanging_gardens.js.git"
     }
 }
