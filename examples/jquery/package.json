@@ -1,7 +1,22 @@
-{ "name":    "jquery"
-, "version": "1.4.4"
-, "main":    "./lib/jquery"
-, "hanging-gardens" :
-  { "lint": false
+{ "name"          : "jquery"
+, "description"   : "jQuery: The Write Less, Do More, JavaScript Library"
+, "url"           : "jquery.com"
+, "keywords"      : ["util", "dom", "jquery"]
+, "author"        : "John Resig <jeresig@gmail.com>"
+, "contributors"  : []
+, "dependencies"  : ["jsdom","htmlparser"]
+, "lib"           : "lib"
+, "main"          : "./lib/jquery-1.4.4.js"
+, "version"       : "1.4.4"
+, "engines" :
+  { "node"   : "*"
+  , "garden" : "*"
+  }
+, "overlay" :
+  { "garden" :
+    { "dependencies" : []
+    , "main"         : "./garden-lib/jquery-1.4.4.js"
+    , "directories"  : { "lib": "garden-lib" }
+    }
   }
 }

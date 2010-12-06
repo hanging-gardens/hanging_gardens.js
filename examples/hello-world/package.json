@@ -1,5 +1,7 @@
-{ "type" : "application"
-, "main": "./behaviours/index"
+{ "name"    : "hello-world"
+, "version" : "0.0.1"
+, "type"    : "application"
+, "main"    : "./behaviours/index"
 
 , "hanging-gardens":
   { "lint" : true
@@ -7,6 +9,6 @@
   }
 
 , "dependencies" :
-  { "jquery": ">= 1.4.4"
+  { "jquery": ">= 1.4.3"
   }
 }

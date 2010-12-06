@@ -1,7 +1,17 @@
-var window   = require("browser/window")
-,   location = require("browser/location")
-;
-
+(function () {
+function create(window) {
+  if ('undefined' === typeof window) {
+    window = require('jsdom').jsdom().createWindow();
+  }
+  if ('function' !== typeof window.XMLHttpRequest && 'function' !== typeof window.ActiveXObject) {
+    window.XMLHttpRequest = function () {};
+    // TODO
+    // node-XMLHttpRequest needs to get on npm
+    // or I'm going to fork re-implement it in AHR
+    navigator = {};
+    navigator.userAgent = "Node.js";
+    location = window.location;
+  }
 /*!
  * jQuery JavaScript Library v1.4.4
  * http://jquery.com/
@@ -7181,7 +7191,11 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 
 
 })(window);
-
-jQuery.noConflict();
-delete window["jQuery"];
-exports = jQuery;
+  return window.jQuery;
+}
+if ('undefined' === typeof module) { module = {}; }
+module.exports = create();
+module.exports.create = create;
+if ('undefined' === typeof provide) { provide = function () {};  }
+provide('jquery');
+}());
