@@ -1,6 +1,4 @@
-{ "name"    : "hello-world"
-, "version" : "0.0.1"
-, "type"    : "application"
+{ "type"    : "application"
 , "main"    : "./behaviours/index"
 
 , "hanging-gardens":
