@@ -1,4 +1,4 @@
-var $       = require("jquery/index")
+var $       = require("jquery")
 ,   console = require("browser/console")
 ;
 

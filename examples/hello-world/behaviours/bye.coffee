@@ -1,4 +1,4 @@
-$ = require('jquery/index')
+$ = require('jquery')
 
 exports.bye = (who) ->
   "Bye #{who}"
