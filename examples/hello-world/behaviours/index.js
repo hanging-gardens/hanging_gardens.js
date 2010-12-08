@@ -1,9 +1,10 @@
-var $       = require("../vendor/jquery")
+var $       = require("jquery/index")
 ,   console = require("browser/console")
 ;
 
 $(function(){
-  require('./hello');
+  console.log('hello %o', {hello: "hello"});
+  require('./behaviours/hello');
 
   $("body").append("<p>Hello Anais</p>");
 

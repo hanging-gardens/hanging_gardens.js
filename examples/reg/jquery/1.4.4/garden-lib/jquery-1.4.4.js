@@ -7183,6 +7183,6 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 
 })(window);
 
+module.exports = jQuery;
 jQuery.noConflict();
 delete window["jQuery"];
-module.exports = jQuery;

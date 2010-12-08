@@ -17,7 +17,6 @@
     , "main"         : "./garden-lib/jquery-1.4.4.js"
     , "directories"  : { "lib": "garden-lib" }
     , "lint"         : false
-    , "compression"  : "yui"
     }
   }
 }
