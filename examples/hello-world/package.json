@@ -1,7 +1,7 @@
 { "type"    : "application"
 , "main"    : "./behaviours/index"
 
-, "lint"        : false
+, "lint"        : true
 , "compression" : "yui"
 
 , "dependencies" :
