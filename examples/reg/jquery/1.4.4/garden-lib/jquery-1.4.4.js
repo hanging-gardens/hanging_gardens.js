@@ -1,5 +1,6 @@
-var window   = require("browser/window")
-,   location = require("browser/location")
+var window    = require("browser/window")
+,   location  = require("browser/location")
+,   navigator = require("browser/navigator")
 ;
 
 /*!
