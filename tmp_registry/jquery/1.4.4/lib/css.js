@@ -181,7 +181,7 @@ jQuery.each(["height", "width"], function( i, name ) {
 						val = currentStyle( elem, name, name );
 					}
 
-					if ( val !== null ) {
+					if ( val ) {
 						// Should return "auto" instead of 0, use 0 for
 						// temporary backwards-compat
 						return val === "" || val === "auto" ? "0px" : val;

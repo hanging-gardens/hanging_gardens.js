@@ -1,12 +1,13 @@
 var $       = require("jquery")
 ,   console = require("browser/console")
+,   bye     = require("app/behaviours/bye")
 ;
 
 $(function(){
   console.log('hello %o', {hello: "hello"});
-  require('./behaviours/hello');
+  require('app/behaviours/hello');
 
   $("body").append("<p>Hello Anais</p>");
 
-  console.log('hello %o', {hello: "hello"});
+  bye.bye('Simon');
 });

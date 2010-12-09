@@ -201,10 +201,10 @@ jQuery.offset = {
 			options = options.call( elem, i, curOffset );
 		}
 
-		if (options.top !== null) {
+		if (options.top) {
 			props.top = (options.top - curOffset.top) + curTop;
 		}
-		if (options.left !== null) {
+		if (options.left) {
 			props.left = (options.left - curOffset.left) + curLeft;
 		}
 		

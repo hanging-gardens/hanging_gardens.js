@@ -289,7 +289,7 @@ function SoundManager(smURL, smID) {
       oSound._setup_html5(_tO);
     } else {
       if (_fV > 8 && _s.useMovieStar) {
-        if (_tO.isMovieStar === null) {
+        if (!(_tO.isMovieStar)) {
           _tO.isMovieStar = ((_tO.serverURL || (_tO.type?_tO.type.match(_s.netStreamPattern):false)||_tO.url.match(_s.netStreamPattern))?true:false);
         }
         if (_tO.isMovieStar) {
@@ -762,7 +762,7 @@ function SoundManager(smURL, smID) {
       if (_s.debugMode) {
         var stuff = null, msg = [], sF, sfBracket, maxLength = 64;
         for (stuff in _t.options) {
-          if (_t.options[stuff] !== null) {
+          if (_t.options[stuff]) {
             if (_t.options[stuff] instanceof Function) {
               // handle functions specially
               sF = _t.options[stuff].toString();
@@ -1461,7 +1461,7 @@ function SoundManager(smURL, smID) {
     };
 
     this._whileplaying = function(nPosition, oPeakData, oWaveformDataLeft, oWaveformDataRight, oEQData) {
-      if (isNaN(nPosition) || nPosition === null) {
+      if (isNaN(nPosition) || (!nPosition)) {
         return false; // Flash may return NaN at times
       }
       if (_t.playState === 0 && nPosition > 0) {
@@ -2155,7 +2155,7 @@ function SoundManager(smURL, smID) {
 
     _s.wmode = (!_s.wmode && _s.useHighPerformance && !_s.useMovieStar?'transparent':_s.wmode);
 
-    if (_s.wmode !== null && !_isIE && !_s.useHighPerformance && navigator.platform.match(/win32/i)) {
+    if (_s.wmode && !_isIE && !_s.useHighPerformance && navigator.platform.match(/win32/i)) {
       _s.specialWmodeCase = true;
       // extra-special case: movie doesn't load until scrolled into view when using wmode = anything but 'window' here
       // does not apply when using high performance (position:fixed means on-screen), OR infinite flash load timeout
@@ -2367,7 +2367,7 @@ function SoundManager(smURL, smID) {
       }
       // give up / time-out, depending
       if (!_didInit && _okToDisable) {
-        if (p === null) {
+        if (!(p)) {
           // SWF failed. Maybe blocked.
           if (_s.useFlashBlock || _s.flashLoadTimeout === 0) {
             if (_s.useFlashBlock) {
@@ -2461,7 +2461,7 @@ function SoundManager(smURL, smID) {
     if (!_s.supported()) {
       if (_needsFlash) {
         // make the movie more visible, so user can fix
-        _s.oMC.className = _getSWFCSS() + ' ' + _s.swfCSS.swfDefault + ' ' + (p === null?_s.swfCSS.swfTimedout:_s.swfCSS.swfError);
+        _s.oMC.className = _getSWFCSS() + ' ' + _s.swfCSS.swfDefault + ' ' + (!(p)?_s.swfCSS.swfTimedout:_s.swfCSS.swfError);
         _s._wD(name+': '+_str('fbTimeout')+(p?' ('+_str('fbLoaded')+')':''));
       }
       _s.didFlashBlock = true;
@@ -2522,7 +2522,7 @@ function SoundManager(smURL, smID) {
     _s._wD('-- SoundManager 2 ' + (_disabled?'failed to load':'loaded') + ' (' + (_disabled?'security/load error':'OK') + ') --', 1);
     if (_disabled || bNoDisable) {
       if (_s.useFlashBlock) {
-        _s.oMC.className = _getSWFCSS() + ' ' + (_s.getMoviePercent() === null?_s.swfCSS.swfTimedout:_s.swfCSS.swfError);
+        _s.oMC.className = _getSWFCSS() + ' ' + (!(_s.getMoviePercent())?_s.swfCSS.swfTimedout:_s.swfCSS.swfError);
       }
       _processOnReady();
       _debugTS('onload', false);

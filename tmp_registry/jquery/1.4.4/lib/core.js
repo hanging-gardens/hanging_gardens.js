@@ -340,7 +340,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 
 	for ( ; i < length; i++ ) {
 		// Only deal with non-null/undefined values
-		if ( (options = arguments[ i ]) !== null ) {
+		if ( (options = arguments[ i ]) ) {
 			// Extend the base object
 			for ( name in options ) {
 				src = target[ name ];
@@ -645,7 +645,7 @@ jQuery.extend({
 	makeArray: function( array, results ) {
 		var ret = results || [];
 
-		if ( array !== null ) {
+		if ( array ) {
 			// The window, strings (and functions) also have 'length'
 			// The extra typeof function check is to prevent crashes
 			// in Safari 2 (See: #3039)
@@ -721,7 +721,7 @@ jQuery.extend({
 		for ( var i = 0, length = elems.length; i < length; i++ ) {
 			value = callback( elems[ i ], i, arg );
 
-			if ( value !== null ) {
+			if ( value ) {
 				ret[ ret.length ] = value;
 			}
 		}

@@ -880,7 +880,7 @@ function now() {
 		// (WebKit defaults to false instead of true, IE too, if it's in an optgroup)
 		optSelected: document.createElement("select").appendChild( document.createElement("option") ).selected,
 
-		parentNode: div.removeChild( div.appendChild( document.createElement("div") ) ).parentNode === null,
+		parentNode: div.removeChild( div.appendChild( document.createElement("div") ) (!).parentNode),
 
 		// Will be defined later
 		deleteExpando: true,
@@ -1382,7 +1382,7 @@ jQuery.fn.extend({
 
 				// Handle the case where in Webkit "" is returned instead of "on" if a value isn't specified
 				if ( rradiocheck.test( elem.type ) && !jQuery.support.checkOn ) {
-					return elem.getAttribute("value") === null ? "on" : elem.value;
+					return (!elem.getAttribute("value")) ? "on" : elem.value;
 				}
 				
 
@@ -1532,7 +1532,7 @@ jQuery.extend({
 					elem.getAttribute( name );
 
 			// Non-existent attributes return null, we normalize to undefined
-			return attr === null ? undefined : attr;
+			return (!attr) ? undefined : attr;
 		}
 
 		// elem is actually elem.style ... set the style
@@ -2660,7 +2660,7 @@ var Sizzle = function(selector, context, results, seed) {
 		soFar = selector;
 	
 	// Reset the position of the chunker regexp (start from head)
-	while ( (chunker.exec(""), m = chunker.exec(soFar)) !== null ) {
+	while ( (chunker.exec(""), m = chunker.exec(soFar)) ) {
 		soFar = m[3];
 		
 		parts.push( m[1] );
@@ -5029,7 +5029,7 @@ jQuery.extend({
 			};
 		}
 
-		if ( s.dataType === "script" && s.cache === null ) {
+		if ( s.dataType === "script" && (!s.cache) ) {
 			s.cache = false;
 		}
 

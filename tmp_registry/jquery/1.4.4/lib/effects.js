@@ -176,7 +176,7 @@ jQuery.fn.extend({
 				}
 			}
 
-			if ( opt.overflow !== null ) {
+			if ( opt.overflow ) {
 				this.style.overflow = "hidden";
 			}
 
@@ -337,7 +337,7 @@ jQuery.fx.prototype = {
 
 	// Get the current size
 	cur: function() {
-		if ( this.elem[this.prop] !== null && (!this.elem.style || this.elem.style[this.prop] === null) ) {
+		if ( this.elem[this.prop] && (!this.elem.style || this.elem.style[this.prop] === null) ) {
 			return this.elem[ this.prop ];
 		}
 
@@ -412,7 +412,7 @@ jQuery.fx.prototype = {
 
 			if ( done ) {
 				// Reset the overflow
-				if ( this.options.overflow !== null && !jQuery.support.shrinkWrapBlocks ) {
+				if ( this.options.overflow && !jQuery.support.shrinkWrapBlocks ) {
 					var elem = this.elem,
 						options = this.options;
 
@@ -492,7 +492,7 @@ jQuery.extend( jQuery.fx, {
 		},
 
 		_default: function( fx ) {
-			if ( fx.elem.style && fx.elem.style[ fx.prop ] !== null ) {
+			if ( fx.elem.style && fx.elem.style[ fx.prop ] ) {
 				fx.elem.style[ fx.prop ] = (fx.prop === "width" || fx.prop === "height" ? Math.max(0, fx.now) : fx.now) + fx.unit;
 			} else {
 				fx.elem[ fx.prop ] = fx.now;

@@ -212,7 +212,7 @@ jQuery.extend({
 		s.url = s.url.replace( rhash, "" );
 
 		// Use original (not extended) context object if it was provided
-		s.context = origSettings && origSettings.context !== null ? origSettings.context : s;
+		s.context = origSettings && origSettings.context ? origSettings.context : s;
 
 		// convert data if not already a string
 		if ( s.data && s.processData && typeof s.data !== "string" ) {
@@ -359,7 +359,7 @@ jQuery.extend({
 		// Need an extra try/catch for cross domain requests in Firefox 3
 		try {
 			// Set content-type if data specified and content-body is valid for this type
-			if ( (s.data !== null && !noContent) || (origSettings && origSettings.contentType) ) {
+			if ( (s.data && !noContent) || (origSettings && origSettings.contentType) ) {
 				xhr.setRequestHeader("Content-Type", s.contentType);
 			}
 
@@ -570,7 +570,7 @@ buildParams = function( prefix, obj, traditional, add ) {
 			}
 		});
 			
-	} else if ( !traditional && obj !== null && typeof obj === "object" ) {
+	} else if ( !traditional && obj && typeof obj === "object" ) {
 		if ( jQuery.isEmptyObject( obj ) ) {
 			add( prefix, "" );
 

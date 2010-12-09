@@ -272,14 +272,14 @@ jQuery.event = {
 						}
 					}
 
-					if ( pos !== null ) {
+					if ( pos ) {
 						break;
 					}
 				}
 			}
 
 			// remove generic event handler if no more handlers exist
-			if ( eventType.length === 0 || pos !== null && eventType.length === 1 ) {
+			if ( eventType.length === 0 || pos && eventType.length === 1 ) {
 				if ( !special.teardown || special.teardown.call( elem, namespaces ) === false ) {
 					jQuery.removeEvent( elem, type, elemData.handle );
 				}
@@ -519,7 +519,7 @@ jQuery.event = {
 		}
 
 		// Calculate pageX/Y if missing and clientX/Y available
-		if ( event.pageX === null && event.clientX !== null ) {
+		if ( event.pageX === null && event.clientX ) {
 			var doc = document.documentElement,
 				body = document.body;
 
@@ -528,8 +528,8 @@ jQuery.event = {
 		}
 
 		// Add which for key events
-		if ( event.which === null && (event.charCode !== null || event.keyCode !== null) ) {
-			event.which = event.charCode !== null ? event.charCode : event.keyCode;
+		if ( event.which === null && (event.charCode || event.keyCode) ) {
+			event.which = event.charCode ? event.charCode : event.keyCode;
 		}
 
 		// Add metaKey to non-Mac browsers (use ctrl for PC's and Meta for Macs)
@@ -803,7 +803,7 @@ if ( !jQuery.support.changeBubbles ) {
 			return;
 		}
 
-		if ( data !== null || val ) {
+		if ( data || val ) {
 			e.type = "change";
 			e.liveFired = undefined;
 			return jQuery.event.trigger( e, arguments[1], elem );
@@ -1037,7 +1037,7 @@ jQuery.each(["live", "die"], function( i, name ) {
 
 		types = (types || "").split(" ");
 
-		while ( (type = types[ i++ ]) !== null ) {
+		while ( (type = types[ i++ ]) ) {
 			match = rnamespaces.exec( type );
 			namespaces = "";
 

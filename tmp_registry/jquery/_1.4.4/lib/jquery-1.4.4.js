@@ -1621,7 +1621,7 @@ jQuery.fn.extend({
 						var option = options[ i ];
 
 						// Don't return options that are disabled or in a disabled optgroup
-						if ( option.selected && (jQuery.support.optDisabled ? !option.disabled : option.getAttribute("disabled") === null) &&
+						if ( option.selected && (jQuery.support.optDisabled ? !option.disabled : (!option.getAttribute("disabled"))) &&
 								(!option.parentNode.disabled || !jQuery.nodeName( option.parentNode, "optgroup" )) ) {
 
 							// Get the specific value for the option
@@ -1642,7 +1642,7 @@ jQuery.fn.extend({
 
 				// Handle the case where in Webkit "" is returned instead of "on" if a value isn't specified
 				if ( rradiocheck.test( elem.type ) && !jQuery.support.checkOn ) {
-					return elem.getAttribute("value") === null ? "on" : elem.value;
+					return (!elem.getAttribute("value")) ? "on" : elem.value;
 				}
 
 
@@ -1754,7 +1754,7 @@ jQuery.extend({
 					jQuery.error( "type property can't be changed" );
 				}
 
-				if ( value === null ) {
+				if ( (!value) ) {
 					if ( elem.nodeType === 1 ) {
 						elem.removeAttribute( name );
 					}
@@ -1809,7 +1809,7 @@ jQuery.extend({
 				elem.getAttribute( name );
 
 		// Non-existent attributes return null, we normalize to undefined
-		return attr === null ? undefined : attr;
+		return (!attr) ? undefined : attr;
 	}
 });
 
@@ -5840,7 +5840,7 @@ jQuery.extend({
 			};
 		}
 
-		if ( s.dataType === "script" && s.cache === null ) {
+		if ( s.dataType === "script" && (!s.cache) ) {
 			s.cache = false;
 		}
 
