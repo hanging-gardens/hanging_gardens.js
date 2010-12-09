@@ -1,0 +1,16 @@
+{ "name"          : "jquery-scroll-to"
+, "description"   : "Easy element scrolling using jQuery."
+, "url"           : "http://flesler.blogspot.com/2007/10/jqueryscrollto.html"
+, "author"        : "Ariel Flesler"
+, "contributors"  : []
+, "dependencies"  : 
+  { "jquery" : ">= 1.4.4"
+  }
+, "main"          : "./lib/scroll-to.js"
+, "version"       : "1.4.2"
+, "engines" :
+  { "garden" : "*"
+  }
+, "lint"         : false
+, "compression"  : "yui"
+}

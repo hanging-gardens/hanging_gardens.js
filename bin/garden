@@ -5,4 +5,4 @@ var path = require('path')
 ,   lib  = path.join(path.dirname(fs.realpathSync(__filename)), '../lib')
 ;
 
-require(lib + '/hanging_gardens').run();
+require(lib + '/command').run();
