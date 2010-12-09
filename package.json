@@ -24,8 +24,9 @@
 , "bin"      :
   { "garden" : "./bin/garden"
   }
-, "dependencies" :
-  { "lint"     : ">= 0.1.10"
+, "dependencies"    :
+  { "lint"          : ">= 0.1.10"
+  , "coffee-script" : ">= 0.9.5"
   }
 , "repository" :
   { "type"     : "git"
