@@ -23,7 +23,7 @@
   "eqeqeq": false,     // if === should be required
   //"es5": true,       // if ES5 syntax should be allowed
   //"evil": false,     // if eval should be allowed
-  //"forin": false,    // if for in statements must filter
+  "forin": true,       // if for in statements must filter
   //"fragment": false, // if HTML fragments should be allowed
   "immed": true,       // if immediate invocations must be wrapped in parens
   "laxbreak": true,    // if line breaks should not be checked
@@ -39,7 +39,7 @@
   //"safe": false,     // if use of some browser features should be restricted
   //"windows": false,  // if MS Windows-specific globals should be predefined
   //"strict": false,   // require the "use strict"; pragma
-  //"sub": false,      // if all forms of subscript notation are tolerated
+  "sub": true,         // if all forms of subscript notation are tolerated
   "white": false,      // if strict whitespace rules apply
   //"widget": false,   // if the Yahoo Widgets globals should be predefined
   //"indent": 2,       // set the expected indentation level

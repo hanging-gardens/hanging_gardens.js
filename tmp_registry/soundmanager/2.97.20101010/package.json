@@ -1,0 +1,16 @@
+{ "name"          : "soundmanager"
+, "description"   : "SoundManager 2: Javascript Sound for the Web"
+, "url"           : "http://schillmania.com/projects/soundmanager2/"
+, "author"        : "schillmania"
+, "contributors"  : []
+, "dependencies"  : 
+  { "animator" : "1.1.9"
+  }
+, "main"          : "./lib/soundmanager.js"
+, "version"       : "2.97.20101010"
+, "engines" :
+  { "garden" : "*"
+  }
+, "lint"         : false
+, "compression"  : "yui"
+}
