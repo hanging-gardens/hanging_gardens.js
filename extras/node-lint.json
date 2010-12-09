@@ -22,7 +22,7 @@
   //"devel": false,    // if logging should be allowed (console, alert, etc.)
   "eqeqeq": false,     // if === should be required
   //"es5": true,       // if ES5 syntax should be allowed
-  //"evil": false,     // if eval should be allowed
+  "evil": true,        // if eval should be allowed
   "forin": true,       // if for in statements must filter
   //"fragment": false, // if HTML fragments should be allowed
   "immed": true,       // if immediate invocations must be wrapped in parens
