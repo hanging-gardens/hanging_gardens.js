@@ -199,7 +199,7 @@ jQuery.fn.extend({
 	}
 });
 
-dataAttr = function ( elem, key, data ) {
+function dataAttr( elem, key, data ) {
 	// If nothing was found internally, try to fetch any
 	// data from the HTML5 data-* attribute
 	if ( data === undefined && elem.nodeType === 1 ) {
@@ -224,4 +224,4 @@ dataAttr = function ( elem, key, data ) {
 	}
 
 	return data;
-};
+}

@@ -1,21 +1,19 @@
+var jQuery = (function() {
+
 // Define a local copy of jQuery
-var jQuery
-,   window    = require('browser/window')
-,   document  = require('browser/document')
-,   navigator = require('browser/navigator')
-;
+var jQuery = function( selector, context ) {
+		// The jQuery object is actually just the init constructor 'enhanced'
+		return new jQuery.fn.init( selector, context );
+	},
 
-var doScrollCheck
-;
+	// Map over jQuery in case of overwrite
+	_jQuery = window.jQuery,
 
-jQuery = function( selector, context ) {
-	// The jQuery object is actually just the init constructor 'enhanced'
-	return new jQuery.fn.init( selector, context );
-};
+	// Map over the $ in case of overwrite
+	_$ = window.$,
 
-module.exports = jQuery;
-
-var rootjQuery,
+	// A central reference to the root jQuery(document)
+	rootjQuery,
 
 	// A simple way to check for HTML strings or ID strings
 	// (both of which we optimize for)
@@ -211,7 +209,7 @@ jQuery.fn = jQuery.prototype = {
 	// Get the Nth element in the matched element set OR
 	// Get the whole matched element set as a clean array
 	get: function( num ) {
-		return num === null ?
+		return num == null ?
 
 			// Return a 'clean' array
 			this.toArray() :
@@ -340,7 +338,7 @@ jQuery.extend = jQuery.fn.extend = function() {
 
 	for ( ; i < length; i++ ) {
 		// Only deal with non-null/undefined values
-		if ( (options = arguments[ i ]) ) {
+		if ( (options = arguments[ i ]) != null ) {
 			// Extend the base object
 			for ( name in options ) {
 				src = target[ name ];
@@ -377,6 +375,15 @@ jQuery.extend = jQuery.fn.extend = function() {
 };
 
 jQuery.extend({
+	noConflict: function( deep ) {
+		window.$ = _$;
+
+		if ( deep ) {
+			window.jQuery = _jQuery;
+		}
+
+		return jQuery;
+	},
 	
 	// Is the DOM ready to be used? Set to true once it occurs.
 	isReady: false,
@@ -465,7 +472,7 @@ jQuery.extend({
 			var toplevel = false;
 
 			try {
-				toplevel = window.frameElement === null;
+				toplevel = window.frameElement == null;
 			} catch(e) {}
 
 			if ( document.documentElement.doScroll && toplevel ) {
@@ -491,11 +498,11 @@ jQuery.extend({
 	},
 
 	isNaN: function( obj ) {
-		return obj === null || !rdigit.test( obj ) || isNaN( obj );
+		return obj == null || !rdigit.test( obj ) || isNaN( obj );
 	},
 
 	type: function( obj ) {
-		return obj === null ?
+		return obj == null ?
 			String( obj ) :
 			class2type[ toString.call(obj) ] || "object";
 	},
@@ -629,14 +636,14 @@ jQuery.extend({
 	// Use native String.trim function wherever possible
 	trim: trim ?
 		function( text ) {
-			return text === null ?
+			return text == null ?
 				"" :
 				trim.call( text );
 		} :
 
 		// Otherwise use our own trimming functionality
 		function( text ) {
-			return text === null ?
+			return text == null ?
 				"" :
 				text.toString().replace( trimLeft, "" ).replace( trimRight, "" );
 		},
@@ -645,14 +652,14 @@ jQuery.extend({
 	makeArray: function( array, results ) {
 		var ret = results || [];
 
-		if ( array ) {
+		if ( array != null ) {
 			// The window, strings (and functions) also have 'length'
 			// The extra typeof function check is to prevent crashes
 			// in Safari 2 (See: #3039)
 			// Tweaked logic slightly to handle Blackberry 4.7 RegExp issues #6930
 			var type = jQuery.type(array);
 
-			if ( array.length === null || type === "string" || type === "function" || type === "regexp" || jQuery.isWindow( array ) ) {
+			if ( array.length == null || type === "string" || type === "function" || type === "regexp" || jQuery.isWindow( array ) ) {
 				push.call( ret, array );
 			} else {
 				jQuery.merge( ret, array );
@@ -721,7 +728,7 @@ jQuery.extend({
 		for ( var i = 0, length = elems.length; i < length; i++ ) {
 			value = callback( elems[ i ], i, arg );
 
-			if ( value ) {
+			if ( value != null ) {
 				ret[ ret.length ] = value;
 			}
 		}
@@ -860,7 +867,7 @@ if ( document.addEventListener ) {
 }
 
 // The DOM ready check for Internet Explorer
-doScrollCheck = function() {
+function doScrollCheck() {
 	if ( jQuery.isReady ) {
 		return;
 	}
@@ -876,18 +883,9 @@ doScrollCheck = function() {
 
 	// and execute any waiting functions
 	jQuery.ready();
-};
+}
 
-require('jquery/support');
-require('jquery/data');
-require('jquery/queue');
-require('jquery/attributes');
-require('jquery/event');
-require('jquery/selector');
-require('jquery/traversing');
-require('jquery/manipulation');
-require('jquery/css');
-require('jquery/ajax');
-require('jquery/effects');
-require('jquery/offset');
-require('jquery/dimensions');
+// Expose jQuery to the global object
+return (window.jQuery = window.$ = jQuery);
+
+})();

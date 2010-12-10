@@ -2,8 +2,6 @@ var jQuery   = require('jquery')
 ,   document = require('browser/document')
 ;
 
-var getWH
-;
 
 var ralpha = /alpha\([^)]*\)/i,
 	ropacity = /opacity=([^)]*)/,
@@ -87,7 +85,7 @@ jQuery.extend({
 		// Check if we're setting a value
 		if ( value !== undefined ) {
 			// Make sure that NaN and null values aren't set. See: #7116
-			if ( typeof value === "number" && isNaN( value ) || value === null ) {
+			if ( typeof value === "number" && isNaN( value ) || value == null ) {
 				return;
 			}
 
@@ -181,14 +179,14 @@ jQuery.each(["height", "width"], function( i, name ) {
 						val = currentStyle( elem, name, name );
 					}
 
-					if ( val ) {
+					if ( val != null ) {
 						// Should return "auto" instead of 0, use 0 for
 						// temporary backwards-compat
 						return val === "" || val === "auto" ? "0px" : val;
 					}
 				}
 
-				if ( val < 0 || val === null ) {
+				if ( val < 0 || val == null ) {
 					val = elem.style[ name ];
 
 					// Should return "auto" instead of 0, use 0 for
@@ -298,7 +296,7 @@ if ( document.documentElement.currentStyle ) {
 
 curCSS = getComputedStyle || currentStyle;
 
-getWH = function ( elem, name, extra ) {
+function getWH( elem, name, extra ) {
 	var which = name === "width" ? cssWidth : cssHeight,
 		val = name === "width" ? elem.offsetWidth : elem.offsetHeight;
 
@@ -320,7 +318,7 @@ getWH = function ( elem, name, extra ) {
 	});
 
 	return val;
-};
+}
 
 if ( jQuery.expr && jQuery.expr.filters ) {
 	jQuery.expr.filters.hidden = function( elem ) {

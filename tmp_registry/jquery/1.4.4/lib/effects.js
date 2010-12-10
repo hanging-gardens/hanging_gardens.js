@@ -1,9 +1,6 @@
 var jQuery = require('jquery')
 ;
 
-var genFx
-,   defaultDisplay
-;
 
 var elemdisplay = {},
 	rfxtypes = /^(?:toggle|show|hide)$/,
@@ -91,7 +88,7 @@ jQuery.fn.extend({
 		if ( jQuery.isFunction(fn) && jQuery.isFunction(fn2) ) {
 			this._toggle.apply( this, arguments );
 
-		} else if ( fn === null || bool ) {
+		} else if ( fn == null || bool ) {
 			this.each(function() {
 				var state = bool ? fn : jQuery(this).is(":hidden");
 				jQuery(this)[ state ? "show" : "hide" ]();
@@ -176,7 +173,7 @@ jQuery.fn.extend({
 				}
 			}
 
-			if ( opt.overflow ) {
+			if ( opt.overflow != null ) {
 				this.style.overflow = "hidden";
 			}
 
@@ -252,7 +249,7 @@ jQuery.fn.extend({
 
 });
 
-genFx = function ( type, num ) {
+function genFx( type, num ) {
 	var obj = {};
 
 	jQuery.each( fxAttrs.concat.apply([], fxAttrs.slice(0,num)), function() {
@@ -260,7 +257,7 @@ genFx = function ( type, num ) {
 	});
 
 	return obj;
-};
+}
 
 // Generate shortcuts for custom animations
 jQuery.each({
@@ -337,7 +334,7 @@ jQuery.fx.prototype = {
 
 	// Get the current size
 	cur: function() {
-		if ( this.elem[this.prop] && (!this.elem.style || this.elem.style[this.prop] === null) ) {
+		if ( this.elem[this.prop] != null && (!this.elem.style || this.elem.style[this.prop] == null) ) {
 			return this.elem[ this.prop ];
 		}
 
@@ -412,7 +409,7 @@ jQuery.fx.prototype = {
 
 			if ( done ) {
 				// Reset the overflow
-				if ( this.options.overflow && !jQuery.support.shrinkWrapBlocks ) {
+				if ( this.options.overflow != null && !jQuery.support.shrinkWrapBlocks ) {
 					var elem = this.elem,
 						options = this.options;
 
@@ -492,7 +489,7 @@ jQuery.extend( jQuery.fx, {
 		},
 
 		_default: function( fx ) {
-			if ( fx.elem.style && fx.elem.style[ fx.prop ] ) {
+			if ( fx.elem.style && fx.elem.style[ fx.prop ] != null ) {
 				fx.elem.style[ fx.prop ] = (fx.prop === "width" || fx.prop === "height" ? Math.max(0, fx.now) : fx.now) + fx.unit;
 			} else {
 				fx.elem[ fx.prop ] = fx.now;
@@ -509,7 +506,7 @@ if ( jQuery.expr && jQuery.expr.filters ) {
 	};
 }
 
-defaultDisplay = function ( nodeName ) {
+function defaultDisplay( nodeName ) {
 	if ( !elemdisplay[ nodeName ] ) {
 		var elem = jQuery("<" + nodeName + ">").appendTo("body"),
 			display = elem.css("display");
@@ -524,4 +521,4 @@ defaultDisplay = function ( nodeName ) {
 	}
 
 	return elemdisplay[ nodeName ];
-};
+}

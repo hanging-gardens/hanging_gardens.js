@@ -3,12 +3,6 @@ var jQuery   = require('jquery')
 ,   document = require('browser/document')
 ;
 
-var returnFalse
-,   returnTrue
-,   liveConvert
-,   liveHandler
-,   trigger
-;
 
 var rnamespaces = /\.(.*)$/,
 	rformElems = /^(?:textarea|input|select)$/i,
@@ -263,7 +257,7 @@ jQuery.event = {
 				if ( handler.guid === handleObj.guid ) {
 					// remove the given handler for the given type
 					if ( all || namespace.test( handleObj.namespace ) ) {
-						if ( pos === null ) {
+						if ( pos == null ) {
 							eventType.splice( j--, 1 );
 						}
 
@@ -272,14 +266,14 @@ jQuery.event = {
 						}
 					}
 
-					if ( pos ) {
+					if ( pos != null ) {
 						break;
 					}
 				}
 			}
 
 			// remove generic event handler if no more handlers exist
-			if ( eventType.length === 0 || pos && eventType.length === 1 ) {
+			if ( eventType.length === 0 || pos != null && eventType.length === 1 ) {
 				if ( !special.teardown || special.teardown.call( elem, namespaces ) === false ) {
 					jQuery.removeEvent( elem, type, elemData.handle );
 				}
@@ -519,7 +513,7 @@ jQuery.event = {
 		}
 
 		// Calculate pageX/Y if missing and clientX/Y available
-		if ( event.pageX === null && event.clientX ) {
+		if ( event.pageX == null && event.clientX != null ) {
 			var doc = document.documentElement,
 				body = document.body;
 
@@ -528,8 +522,8 @@ jQuery.event = {
 		}
 
 		// Add which for key events
-		if ( event.which === null && (event.charCode || event.keyCode) ) {
-			event.which = event.charCode ? event.charCode : event.keyCode;
+		if ( event.which == null && (event.charCode != null || event.keyCode != null) ) {
+			event.which = event.charCode != null ? event.charCode : event.keyCode;
 		}
 
 		// Add metaKey to non-Mac browsers (use ctrl for PC's and Meta for Macs)
@@ -623,12 +617,12 @@ jQuery.Event = function( src ) {
 	this[ jQuery.expando ] = true;
 };
 
-returnFalse = function () {
+function returnFalse() {
 	return false;
-};
-returnTrue = function () {
+}
+function returnTrue() {
 	return true;
-};
+}
 
 // jQuery.Event is based on DOM3 Events as specified by the ECMAScript Language Binding
 // http://www.w3.org/TR/2003/WD-DOM-Level-3-Events-20030331/ecma-script-binding.html
@@ -803,7 +797,7 @@ if ( !jQuery.support.changeBubbles ) {
 			return;
 		}
 
-		if ( data || val ) {
+		if ( data != null || val ) {
 			e.type = "change";
 			e.liveFired = undefined;
 			return jQuery.event.trigger( e, arguments[1], elem );
@@ -870,17 +864,14 @@ if ( !jQuery.support.changeBubbles ) {
 	changeFilters.focus = changeFilters.beforeactivate;
 }
 
-trigger = function ( type, elem, args ) {
+function trigger( type, elem, args ) {
 	args[0].type = type;
 	return jQuery.event.handle.apply( elem, args );
-};
+}
 
 // Create "bubbling" focus and blur events
 if ( document.addEventListener ) {
 	jQuery.each({ focus: "focusin", blur: "focusout" }, function( orig, fix ) {
-	  var handler
-	  ;
-	  
 		jQuery.event.special[ fix ] = {
 			setup: function() {
 				if ( focusCounts[fix]++ === 0 ) {
@@ -894,11 +885,11 @@ if ( document.addEventListener ) {
 			}
 		};
 
-		handler = function ( e ) { 
+		function handler( e ) { 
 			e = jQuery.event.fix( e );
 			e.type = fix;
 			return jQuery.event.trigger( e, null, e.target );
-		};
+		}
 	});
 }
 
@@ -1037,7 +1028,7 @@ jQuery.each(["live", "die"], function( i, name ) {
 
 		types = (types || "").split(" ");
 
-		while ( (type = types[ i++ ]) ) {
+		while ( (type = types[ i++ ]) != null ) {
 			match = rnamespaces.exec( type );
 			namespaces = "";
 
@@ -1078,7 +1069,7 @@ jQuery.each(["live", "die"], function( i, name ) {
 	};
 });
 
-liveHandler = function ( event ) {
+function liveHandler( event ) {
 	var stop, maxLevel, related, match, handleObj, elem, j, i, l, data, close, namespace, ret,
 		elems = [],
 		selectors = [],
@@ -1163,11 +1154,11 @@ liveHandler = function ( event ) {
 	}
 
 	return stop;
-};
+}
 
-liveConvert = function ( type, selector ) {
+function liveConvert( type, selector ) {
 	return (type && type !== "*" ? type + "." : "") + selector.replace(rperiod, "`").replace(rspace, "&");
-};
+}
 
 jQuery.each( ("blur focus focusin focusout load resize scroll unload click dblclick " +
 	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
@@ -1175,7 +1166,7 @@ jQuery.each( ("blur focus focusin focusout load resize scroll unload click dblcl
 
 	// Handle event binding
 	jQuery.fn[ name ] = function( data, fn ) {
-		if ( fn === null ) {
+		if ( fn == null ) {
 			fn = data;
 			data = null;
 		}

@@ -230,13 +230,13 @@ jQuery.fn.extend({
 			}
 
 			// Treat null/undefined as ""; convert numbers to string
-			if ( val === null ) {
+			if ( val == null ) {
 				val = "";
 			} else if ( typeof val === "number" ) {
 				val += "";
 			} else if ( jQuery.isArray(val) ) {
 				val = jQuery.map(val, function (value) {
-					return value === null ? "" : value + "";
+					return value == null ? "" : value + "";
 				});
 			}
 
@@ -298,11 +298,11 @@ jQuery.extend({
 		if ( name === "selected" && !jQuery.support.optSelected ) {
 			var parent = elem.parentNode;
 			if ( parent ) {
-				var tmp_0 = parent.selectedIndex;
+				parent.selectedIndex;
 
 				// Make sure that it also works with optgroups, see #5701
 				if ( parent.parentNode ) {
-					var tmp_1 = parent.parentNode.selectedIndex;
+					parent.parentNode.selectedIndex;
 				}
 			}
 		}

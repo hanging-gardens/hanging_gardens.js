@@ -1,9 +1,6 @@
 var jQuery = require('jquery')
 ;
 
-var winnow
-,   isDisconnected
-;
 
 var runtil = /Until$/,
 	rparentsprev = /^(?:parents|prevUntil|prevAll)/,
@@ -155,9 +152,9 @@ jQuery.fn.extend({
 
 // A painfully simple check to see if an element is disconnected
 // from a document (should be improved, where feasible).
-isDisconnected = function ( node ) {
+function isDisconnected( node ) {
 	return !node || !node.parentNode || node.parentNode.nodeType === 11;
-};
+}
 
 jQuery.each({
 	parent: function( elem ) {
@@ -272,7 +269,7 @@ jQuery.extend({
 });
 
 // Implement the identical functionality for filter and not
-winnow = function ( elements, qualifier, keep ) {
+function winnow( elements, qualifier, keep ) {
 	if ( jQuery.isFunction( qualifier ) ) {
 		return jQuery.grep(elements, function( elem, i ) {
 			var retVal = !!qualifier.call( elem, i, elem );
@@ -299,4 +296,4 @@ winnow = function ( elements, qualifier, keep ) {
 	return jQuery.grep(elements, function( elem, i ) {
 		return (jQuery.inArray( elem, qualifier ) >= 0) === keep;
 	});
-};
+}

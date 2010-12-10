@@ -2,10 +2,6 @@ var jQuery   = require('jquery')
 ,   document = require('browser/document')
 ;
 
-var cloneCopyEvent
-,   root
-,   evalScript
-;
 
 var rinlinejQuery = / jQuery\d+="(?:\d+|null)"/g,
 	rleadingWhitespace = /^\s+/,
@@ -159,7 +155,7 @@ jQuery.fn.extend({
 	
 	// keepData is for internal use only--do not document
 	remove: function( selector, keepData ) {
-		for ( var i = 0, elem; (elem = this[i]); i++ ) {
+		for ( var i = 0, elem; (elem = this[i]) != null; i++ ) {
 			if ( !selector || jQuery.filter( selector, [ elem ] ).length ) {
 				if ( !keepData && elem.nodeType === 1 ) {
 					jQuery.cleanData( elem.getElementsByTagName("*") );
@@ -176,7 +172,7 @@ jQuery.fn.extend({
 	},
 
 	empty: function() {
-		for ( var i = 0, elem; (elem = this[i]); i++ ) {
+		for ( var i = 0, elem; (elem = this[i]) != null; i++ ) {
 			// Remove element nodes and prevent memory leaks
 			if ( elem.nodeType === 1 ) {
 				jQuery.cleanData( elem.getElementsByTagName("*") );
@@ -371,14 +367,14 @@ jQuery.fn.extend({
 	}
 });
 
-root = function ( elem, cur ) {
+function root( elem, cur ) {
 	return jQuery.nodeName(elem, "table") ?
 		(elem.getElementsByTagName("tbody")[0] ||
 		elem.appendChild(elem.ownerDocument.createElement("tbody"))) :
 		elem;
-};
+}
 
-cloneCopyEvent = function (orig, ret) {
+function cloneCopyEvent(orig, ret) {
 	var i = 0;
 
 	ret.each(function() {
@@ -401,7 +397,7 @@ cloneCopyEvent = function (orig, ret) {
 			}
 		}
 	});
-};
+}
 
 jQuery.buildFragment = function( args, nodes, scripts ) {
 	var fragment, cacheable, cacheresults,
@@ -476,7 +472,7 @@ jQuery.extend({
 
 		var ret = [];
 
-		for ( var i = 0, elem; (elem = elems[i]); i++ ) {
+		for ( var i = 0, elem; (elem = elems[i]) != null; i++ ) {
 			if ( typeof elem === "number" ) {
 				elem += "";
 			}
@@ -565,7 +561,7 @@ jQuery.extend({
 			special = jQuery.event.special,
 			deleteExpando = jQuery.support.deleteExpando;
 		
-		for ( var i = 0, elem; (elem = elems[i]); i++ ) {
+		for ( var i = 0, elem; (elem = elems[i]) != null; i++ ) {
 			if ( elem.nodeName && jQuery.noData[elem.nodeName.toLowerCase()] ) {
 				continue;
 			}
@@ -599,7 +595,7 @@ jQuery.extend({
 	}
 });
 
-evalScript = function ( i, elem ) {
+function evalScript( i, elem ) {
 	if ( elem.src ) {
 		jQuery.ajax({
 			url: elem.src,
@@ -613,4 +609,4 @@ evalScript = function ( i, elem ) {
 	if ( elem.parentNode ) {
 		elem.parentNode.removeChild( elem );
 	}
-};
+}

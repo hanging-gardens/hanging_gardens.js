@@ -4,8 +4,6 @@ var jQuery   = require('jquery')
 ,   document = require('browser/document')
 ;
 
-var buildParams
-;
 
 var jsc = jQuery.now(),
 	rscript = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
@@ -33,9 +31,9 @@ jQuery.fn.extend({
 			return this;
 		}
 
-		var off = url.indexOf(" "), selector;
+		var off = url.indexOf(" ");
 		if ( off >= 0 ) {
-			selector = url.slice(off, url.length);
+			var selector = url.slice(off, url.length);
 			url = url.slice(0, off);
 		}
 
@@ -108,7 +106,7 @@ jQuery.fn.extend({
 		.map(function( i, elem ) {
 			var val = jQuery(this).val();
 
-			return val === null ?
+			return val == null ?
 				null :
 				jQuery.isArray(val) ?
 					jQuery.map( val, function( val, i ) {
@@ -202,17 +200,13 @@ jQuery.extend({
 	},
 
 	ajax: function( origSettings ) {
-	  var head
-	  ,   script
-	  ;
-	  
 		var s = jQuery.extend(true, {}, jQuery.ajaxSettings, origSettings),
 			jsonp, status, data, type = s.type.toUpperCase(), noContent = rnoContent.test(type);
 
 		s.url = s.url.replace( rhash, "" );
 
 		// Use original (not extended) context object if it was provided
-		s.context = origSettings && origSettings.context ? origSettings.context : s;
+		s.context = origSettings && origSettings.context != null ? origSettings.context : s;
 
 		// convert data if not already a string
 		if ( s.data && s.processData && typeof s.data !== "string" ) {
@@ -263,8 +257,8 @@ jQuery.extend({
 				}
 
 				data = tmp;
-				jQuery.handleSuccess( s, undefined, status, data );
-				jQuery.handleComplete( s, undefined, status, data );
+				jQuery.handleSuccess( s, xhr, status, data );
+				jQuery.handleComplete( s, xhr, status, data );
 				
 				if ( head ) {
 					head.removeChild( script );
@@ -303,8 +297,8 @@ jQuery.extend({
 		// If we're requesting a remote document
 		// and trying to load JSON or Script with a GET
 		if ( s.dataType === "script" && type === "GET" && remote ) {
-			head = document.getElementsByTagName("head")[0] || document.documentElement;
-			script = document.createElement("script");
+			var head = document.getElementsByTagName("head")[0] || document.documentElement;
+			var script = document.createElement("script");
 			if ( s.scriptCharset ) {
 				script.charset = s.scriptCharset;
 			}
@@ -319,8 +313,8 @@ jQuery.extend({
 					if ( !done && (!this.readyState ||
 							this.readyState === "loaded" || this.readyState === "complete") ) {
 						done = true;
-						jQuery.handleSuccess( s, undefined, status, data );
-						jQuery.handleComplete( s, undefined, status, data );
+						jQuery.handleSuccess( s, xhr, status, data );
+						jQuery.handleComplete( s, xhr, status, data );
 
 						// Handle memory leak in IE
 						script.onload = script.onreadystatechange = null;
@@ -359,7 +353,7 @@ jQuery.extend({
 		// Need an extra try/catch for cross domain requests in Firefox 3
 		try {
 			// Set content-type if data specified and content-body is valid for this type
-			if ( (s.data && !noContent) || (origSettings && origSettings.contentType) ) {
+			if ( (s.data != null && !noContent) || (origSettings && origSettings.contentType) ) {
 				xhr.setRequestHeader("Content-Type", s.contentType);
 			}
 
@@ -497,7 +491,7 @@ jQuery.extend({
 
 		// Send the data
 		try {
-			xhr.send( noContent || s.data === null ? null : s.data );
+			xhr.send( noContent || s.data == null ? null : s.data );
 
 		} catch( sendError ) {
 			jQuery.handleError( s, xhr, null, sendError );
@@ -550,7 +544,7 @@ jQuery.extend({
 	}
 });
 
-buildParams = function( prefix, obj, traditional, add ) {
+function buildParams( prefix, obj, traditional, add ) {
 	if ( jQuery.isArray(obj) && obj.length ) {
 		// Serialize array item.
 		jQuery.each( obj, function( i, v ) {
@@ -570,7 +564,7 @@ buildParams = function( prefix, obj, traditional, add ) {
 			}
 		});
 			
-	} else if ( !traditional && obj && typeof obj === "object" ) {
+	} else if ( !traditional && obj != null && typeof obj === "object" ) {
 		if ( jQuery.isEmptyObject( obj ) ) {
 			add( prefix, "" );
 
@@ -585,7 +579,7 @@ buildParams = function( prefix, obj, traditional, add ) {
 		// Serialize scalar item.
 		add( prefix, obj );
 	}
-};
+}
 
 // This is still on the jQuery object... for now
 // Want to move this to jQuery.ajax some day
@@ -640,7 +634,7 @@ jQuery.extend({
 	},
 		
 	triggerGlobal: function( s, type, args ) {
-		(s.context && s.context.url === null ? jQuery(s.context) : jQuery.event).trigger(type, args);
+		(s.context && s.context.url == null ? jQuery(s.context) : jQuery.event).trigger(type, args);
 	},
 
 	// Determines if an XMLHttpRequest was successful or not

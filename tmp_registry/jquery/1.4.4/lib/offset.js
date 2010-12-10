@@ -2,8 +2,6 @@ var jQuery   = require('jquery')
 ,   document = require('browser/document')
 ;
 
-var getWindow
-;
 
 var rtable = /^t(?:able|d|h)$/i,
 	rroot = /^(?:body|html)$/i;
@@ -201,10 +199,10 @@ jQuery.offset = {
 			options = options.call( elem, i, curOffset );
 		}
 
-		if (options.top) {
+		if (options.top != null) {
 			props.top = (options.top - curOffset.top) + curTop;
 		}
-		if (options.left) {
+		if (options.left != null) {
 			props.left = (options.left - curOffset.left) + curLeft;
 		}
 		
@@ -299,10 +297,10 @@ jQuery.each( ["Left", "Top"], function( i, name ) {
 	};
 });
 
-getWindow = function ( elem ) {
+function getWindow( elem ) {
 	return jQuery.isWindow( elem ) ?
 		elem :
 		elem.nodeType === 9 ?
 			elem.defaultView || elem.parentWindow :
 			false;
-};
+}
