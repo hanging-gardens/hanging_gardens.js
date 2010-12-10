@@ -8,7 +8,11 @@ var runtil = /Until$/,
 	rmultiselector = /,/,
 	isSimple = /^.[^:#\[\.,]*$/,
 	slice = Array.prototype.slice,
-	POS = jQuery.expr.match.POS;
+	POS = jQuery.expr.match.POS,
+
+	// pre defs
+	winnow,
+	isDisconnected;
 
 jQuery.fn.extend({
 	find: function( selector ) {
@@ -53,7 +57,7 @@ jQuery.fn.extend({
 	filter: function( selector ) {
 		return this.pushStack( winnow(this, selector, true), "filter", selector );
 	},
-	
+
 	is: function( selector ) {
 		return !!selector && jQuery.filter( selector, this ).length > 0;
 	},
@@ -71,7 +75,7 @@ jQuery.fn.extend({
 					selector = selectors[i];
 
 					if ( !matches[selector] ) {
-						matches[selector] = jQuery.expr.match.POS.test( selector ) ? 
+						matches[selector] = jQuery.expr.match.POS.test( selector ) ?
 							jQuery( selector, context || this.context ) :
 							selector;
 					}
@@ -94,7 +98,7 @@ jQuery.fn.extend({
 			return ret;
 		}
 
-		var pos = POS.test( selectors ) ? 
+		var pos = POS.test( selectors ) ?
 			jQuery( selectors, context || this.context ) : null;
 
 		for ( i = 0, l = this.length; i < l; i++ ) {
@@ -115,10 +119,10 @@ jQuery.fn.extend({
 		}
 
 		ret = ret.length > 1 ? jQuery.unique(ret) : ret;
-		
+
 		return this.pushStack( ret, "closest", selectors );
 	},
-	
+
 	// Determine the position of an element within
 	// the matched set of elements
 	index: function( elem ) {
@@ -152,9 +156,9 @@ jQuery.fn.extend({
 
 // A painfully simple check to see if an element is disconnected
 // from a document (should be improved, where feasible).
-function isDisconnected( node ) {
+isDisconnected = function ( node ) {
 	return !node || !node.parentNode || node.parentNode.nodeType === 11;
-}
+};
 
 jQuery.each({
 	parent: function( elem ) {
@@ -199,7 +203,7 @@ jQuery.each({
 }, function( name, fn ) {
 	jQuery.fn[ name ] = function( until, selector ) {
 		var ret = jQuery.map( this, fn, until );
-		
+
 		if ( !runtil.test( name ) ) {
 			selector = until;
 		}
@@ -228,7 +232,7 @@ jQuery.extend({
 			jQuery.find.matchesSelector(elems[0], expr) ? [ elems[0] ] : [] :
 			jQuery.find.matches(expr, elems);
 	},
-	
+
 	dir: function( elem, dir, until ) {
 		var matched = [],
 			cur = elem[ dir ];
@@ -269,7 +273,7 @@ jQuery.extend({
 });
 
 // Implement the identical functionality for filter and not
-function winnow( elements, qualifier, keep ) {
+winnow = function ( elements, qualifier, keep ) {
 	if ( jQuery.isFunction( qualifier ) ) {
 		return jQuery.grep(elements, function( elem, i ) {
 			var retVal = !!qualifier.call( elem, i, elem );
@@ -296,4 +300,4 @@ function winnow( elements, qualifier, keep ) {
 	return jQuery.grep(elements, function( elem, i ) {
 		return (jQuery.inArray( elem, qualifier ) >= 0) === keep;
 	});
-}
+};

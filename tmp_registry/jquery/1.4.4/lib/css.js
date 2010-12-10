@@ -20,7 +20,10 @@ var ralpha = /alpha\([^)]*\)/i,
 
 	fcamelCase = function( all, letter ) {
 		return letter.toUpperCase();
-	};
+	},
+
+  // pre defs
+	getWH;
 
 jQuery.fn.css = function( name, value ) {
 	// Setting 'undefined' is a no-op
@@ -296,7 +299,7 @@ if ( document.documentElement.currentStyle ) {
 
 curCSS = getComputedStyle || currentStyle;
 
-function getWH( elem, name, extra ) {
+getWH = function ( elem, name, extra ) {
 	var which = name === "width" ? cssWidth : cssHeight,
 		val = name === "width" ? elem.offsetWidth : elem.offsetHeight;
 
@@ -318,7 +321,7 @@ function getWH( elem, name, extra ) {
 	});
 
 	return val;
-}
+};
 
 if ( jQuery.expr && jQuery.expr.filters ) {
 	jQuery.expr.filters.hidden = function( elem ) {

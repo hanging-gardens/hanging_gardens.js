@@ -13,7 +13,11 @@ var elemdisplay = {},
 		[ "width", "marginLeft", "marginRight", "paddingLeft", "paddingRight" ],
 		// opacity animations
 		[ "opacity" ]
-	];
+	],
+
+	// pre defs
+	genFx,
+	defaultDisplay;
 
 jQuery.fn.extend({
 	show: function( speed, easing, callback ) {
@@ -249,7 +253,7 @@ jQuery.fn.extend({
 
 });
 
-function genFx( type, num ) {
+genFx = function ( type, num ) {
 	var obj = {};
 
 	jQuery.each( fxAttrs.concat.apply([], fxAttrs.slice(0,num)), function() {
@@ -257,7 +261,7 @@ function genFx( type, num ) {
 	});
 
 	return obj;
-}
+};
 
 // Generate shortcuts for custom animations
 jQuery.each({
@@ -506,7 +510,7 @@ if ( jQuery.expr && jQuery.expr.filters ) {
 	};
 }
 
-function defaultDisplay( nodeName ) {
+defaultDisplay = function ( nodeName ) {
 	if ( !elemdisplay[ nodeName ] ) {
 		var elem = jQuery("<" + nodeName + ">").appendTo("body"),
 			display = elem.css("display");
@@ -521,4 +525,4 @@ function defaultDisplay( nodeName ) {
 	}
 
 	return elemdisplay[ nodeName ];
-}
+};

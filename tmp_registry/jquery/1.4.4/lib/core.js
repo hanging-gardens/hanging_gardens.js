@@ -1,16 +1,13 @@
-var jQuery = (function() {
+var window    = require('browser/window')
+,   document  = require('browser/document')
+,   navigator = require('browser/navigator')
+;
 
 // Define a local copy of jQuery
 var jQuery = function( selector, context ) {
 		// The jQuery object is actually just the init constructor 'enhanced'
 		return new jQuery.fn.init( selector, context );
 	},
-
-	// Map over jQuery in case of overwrite
-	_jQuery = window.jQuery,
-
-	// Map over the $ in case of overwrite
-	_$ = window.$,
 
 	// A central reference to the root jQuery(document)
 	rootjQuery,
@@ -56,10 +53,10 @@ var jQuery = function( selector, context ) {
 
 	// For matching the engine and version of the browser
 	browserMatch,
-	
+
 	// Has the ready events already been bound?
 	readyBound = false,
-	
+
 	// The functions to execute on DOM ready
 	readyList = [],
 
@@ -73,9 +70,12 @@ var jQuery = function( selector, context ) {
 	slice = Array.prototype.slice,
 	trim = String.prototype.trim,
 	indexOf = Array.prototype.indexOf,
-	
+
 	// [[Class]] -> type pairs
-	class2type = {};
+	class2type = {},
+
+	// pre defs
+	doScrollCheck;
 
 jQuery.fn = jQuery.prototype = {
 	init: function( selector, context ) {
@@ -92,7 +92,7 @@ jQuery.fn = jQuery.prototype = {
 			this.length = 1;
 			return this;
 		}
-		
+
 		// The body element only exists once, optimize finding it
 		if ( selector === "body" && !context && document.body ) {
 			this.context = document;
@@ -131,9 +131,9 @@ jQuery.fn = jQuery.prototype = {
 						ret = jQuery.buildFragment( [ match[1] ], [ doc ] );
 						selector = (ret.cacheable ? ret.fragment.cloneNode(true) : ret.fragment).childNodes;
 					}
-					
+
 					return jQuery.merge( this, selector );
-					
+
 				// HANDLE: $("#id")
 				} else {
 					elem = document.getElementById( match[2] );
@@ -226,7 +226,7 @@ jQuery.fn = jQuery.prototype = {
 
 		if ( jQuery.isArray( elems ) ) {
 			push.apply( ret, elems );
-		
+
 		} else {
 			jQuery.merge( ret, elems );
 		}
@@ -252,7 +252,7 @@ jQuery.fn = jQuery.prototype = {
 	each: function( callback, args ) {
 		return jQuery.each( this, callback, args );
 	},
-	
+
 	ready: function( fn ) {
 		// Attach the listeners
 		jQuery.bindReady();
@@ -270,7 +270,7 @@ jQuery.fn = jQuery.prototype = {
 
 		return this;
 	},
-	
+
 	eq: function( i ) {
 		return i === -1 ?
 			this.slice( i ) :
@@ -295,7 +295,7 @@ jQuery.fn = jQuery.prototype = {
 			return callback.call( elem, i, elem );
 		}));
 	},
-	
+
 	end: function() {
 		return this.prevObject || jQuery(null);
 	},
@@ -375,23 +375,15 @@ jQuery.extend = jQuery.fn.extend = function() {
 };
 
 jQuery.extend({
-	noConflict: function( deep ) {
-		window.$ = _$;
+	noConflict: function() {},
 
-		if ( deep ) {
-			window.jQuery = _jQuery;
-		}
-
-		return jQuery;
-	},
-	
 	// Is the DOM ready to be used? Set to true once it occurs.
 	isReady: false,
 
 	// A counter to track how many items to wait for before
 	// the ready event fires. See #6781
 	readyWait: 1,
-	
+
 	// Handle when the DOM is ready
 	ready: function( wait ) {
 		// A third-party is pushing the ready event forwards
@@ -435,7 +427,7 @@ jQuery.extend({
 			}
 		}
 	},
-	
+
 	bindReady: function() {
 		if ( readyBound ) {
 			return;
@@ -454,7 +446,7 @@ jQuery.extend({
 		if ( document.addEventListener ) {
 			// Use the handy event callback
 			document.addEventListener( "DOMContentLoaded", DOMContentLoaded, false );
-			
+
 			// A fallback to window.onload, that will always work
 			window.addEventListener( "load", jQuery.ready, false );
 
@@ -463,7 +455,7 @@ jQuery.extend({
 			// ensure firing before onload,
 			// maybe late but safe also for iframes
 			document.attachEvent("onreadystatechange", DOMContentLoaded);
-			
+
 			// A fallback to window.onload, that will always work
 			window.attachEvent( "onload", jQuery.ready );
 
@@ -514,20 +506,20 @@ jQuery.extend({
 		if ( !obj || jQuery.type(obj) !== "object" || obj.nodeType || jQuery.isWindow( obj ) ) {
 			return false;
 		}
-		
+
 		// Not own constructor property must be Object
 		if ( obj.constructor &&
 			!hasOwn.call(obj, "constructor") &&
 			!hasOwn.call(obj.constructor.prototype, "isPrototypeOf") ) {
 			return false;
 		}
-		
+
 		// Own properties are enumerated firstly, so to speed up,
 		// if last one is own, then all properties are own.
-	
+
 		var key;
 		for ( key in obj ) {}
-		
+
 		return key === undefined || hasOwn.call( obj, key );
 	},
 
@@ -537,11 +529,11 @@ jQuery.extend({
 		}
 		return true;
 	},
-	
+
 	error: function( msg ) {
 		throw msg;
 	},
-	
+
 	parseJSON: function( data ) {
 		if ( typeof data !== "string" || !data ) {
 			return null;
@@ -549,7 +541,7 @@ jQuery.extend({
 
 		// Make sure leading/trailing whitespace is removed (IE can't handle it)
 		data = jQuery.trim( data );
-		
+
 		// Make sure the incoming data is actual JSON
 		// Logic borrowed from http://json.org/json2.js
 		if ( rvalidchars.test(data.replace(rvalidescape, "@")
@@ -691,7 +683,7 @@ jQuery.extend({
 			for ( var l = second.length; j < l; j++ ) {
 				first[ i++ ] = second[ j ];
 			}
-		
+
 		} else {
 			while ( second[j] !== undefined ) {
 				first[ i++ ] = second[ j++ ];
@@ -771,7 +763,7 @@ jQuery.extend({
 	// The value/s can be optionally by executed if its a function
 	access: function( elems, key, value, exec, fn, pass ) {
 		var length = elems.length;
-	
+
 		// Setting many attributes
 		if ( typeof key === "object" ) {
 			for ( var k in key ) {
@@ -779,19 +771,19 @@ jQuery.extend({
 			}
 			return elems;
 		}
-	
+
 		// Setting one attribute
 		if ( value !== undefined ) {
 			// Optionally, function values get executed if exec is true
 			exec = !pass && exec && jQuery.isFunction(value);
-		
+
 			for ( var i = 0; i < length; i++ ) {
 				fn( elems[i], key, exec ? value.call( elems[i], i, fn( elems[i], key ) ) : value, pass );
 			}
-		
+
 			return elems;
 		}
-	
+
 		// Getting an attribute
 		return length ? fn( elems[0], key ) : undefined;
 	},
@@ -867,7 +859,7 @@ if ( document.addEventListener ) {
 }
 
 // The DOM ready check for Internet Explorer
-function doScrollCheck() {
+doScrollCheck = function() {
 	if ( jQuery.isReady ) {
 		return;
 	}
@@ -883,9 +875,20 @@ function doScrollCheck() {
 
 	// and execute any waiting functions
 	jQuery.ready();
-}
+};
 
-// Expose jQuery to the global object
-return (window.jQuery = window.$ = jQuery);
+module.exports = jQuery;
 
-})();
+require('jquery/support');
+require('jquery/data');
+require('jquery/queue');
+require('jquery/attributes');
+require('jquery/event');
+require('jquery/selector');
+require('jquery/traversing');
+require('jquery/manipulation');
+require('jquery/css');
+require('jquery/ajax');
+require('jquery/effects');
+require('jquery/offset');
+require('jquery/dimensions');

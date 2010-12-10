@@ -19,10 +19,16 @@ var jsc = jQuery.now(),
 	rhash = /#.*$/,
 
 	// Keep a copy of the old load method
-	_load = jQuery.fn.load;
+	_load = jQuery.fn.load,
+
+	// pre defs
+	buildParams;
 
 jQuery.fn.extend({
 	load: function( url, params, callback ) {
+	  var selector
+	  ;
+
 		if ( typeof url !== "string" && _load ) {
 			return _load.apply( this, arguments );
 
@@ -33,7 +39,7 @@ jQuery.fn.extend({
 
 		var off = url.indexOf(" ");
 		if ( off >= 0 ) {
-			var selector = url.slice(off, url.length);
+			selector = url.slice(off, url.length);
 			url = url.slice(0, off);
 		}
 
@@ -200,6 +206,11 @@ jQuery.extend({
 	},
 
 	ajax: function( origSettings ) {
+	  var xhr
+	  ,   head
+	  ,   script
+	  ;
+
 		var s = jQuery.extend(true, {}, jQuery.ajaxSettings, origSettings),
 			jsonp, status, data, type = s.type.toUpperCase(), noContent = rnoContent.test(type);
 
@@ -259,7 +270,7 @@ jQuery.extend({
 				data = tmp;
 				jQuery.handleSuccess( s, xhr, status, data );
 				jQuery.handleComplete( s, xhr, status, data );
-				
+
 				if ( head ) {
 					head.removeChild( script );
 				}
@@ -297,8 +308,8 @@ jQuery.extend({
 		// If we're requesting a remote document
 		// and trying to load JSON or Script with a GET
 		if ( s.dataType === "script" && type === "GET" && remote ) {
-			var head = document.getElementsByTagName("head")[0] || document.documentElement;
-			var script = document.createElement("script");
+			head = document.getElementsByTagName("head")[0] || document.documentElement;
+			script = document.createElement("script");
 			if ( s.scriptCharset ) {
 				script.charset = s.scriptCharset;
 			}
@@ -336,7 +347,7 @@ jQuery.extend({
 		var requestDone = false;
 
 		// Create the request object
-		var xhr = s.xhr();
+		xhr = s.xhr();
 
 		if ( !xhr ) {
 			return;
@@ -518,19 +529,19 @@ jQuery.extend({
 				value = jQuery.isFunction(value) ? value() : value;
 				s[ s.length ] = encodeURIComponent(key) + "=" + encodeURIComponent(value);
 			};
-		
+
 		// Set traditional to true for jQuery <= 1.3.2 behavior.
 		if ( traditional === undefined ) {
 			traditional = jQuery.ajaxSettings.traditional;
 		}
-		
+
 		// If an array was passed in, assume that it is an array of form elements.
 		if ( jQuery.isArray(a) || a.jquery ) {
 			// Serialize the form elements
 			jQuery.each( a, function() {
 				add( this.name, this.value );
 			});
-			
+
 		} else {
 			// If traditional, encode the "old" way (the way 1.3.2 or older
 			// did it), otherwise encode params recursively.
@@ -544,7 +555,7 @@ jQuery.extend({
 	}
 });
 
-function buildParams( prefix, obj, traditional, add ) {
+buildParams = function ( prefix, obj, traditional, add ) {
 	if ( jQuery.isArray(obj) && obj.length ) {
 		// Serialize array item.
 		jQuery.each( obj, function( i, v ) {
@@ -563,7 +574,7 @@ function buildParams( prefix, obj, traditional, add ) {
 				buildParams( prefix + "[" + ( typeof v === "object" || jQuery.isArray(v) ? i : "" ) + "]", v, traditional, add );
 			}
 		});
-			
+
 	} else if ( !traditional && obj != null && typeof obj === "object" ) {
 		if ( jQuery.isEmptyObject( obj ) ) {
 			add( prefix, "" );
@@ -574,12 +585,12 @@ function buildParams( prefix, obj, traditional, add ) {
 				buildParams( prefix + "[" + k + "]", v, traditional, add );
 			});
 		}
-					
+
 	} else {
 		// Serialize scalar item.
 		add( prefix, obj );
 	}
-}
+};
 
 // This is still on the jQuery object... for now
 // Want to move this to jQuery.ajax some day
@@ -632,7 +643,7 @@ jQuery.extend({
 			jQuery.event.trigger( "ajaxStop" );
 		}
 	},
-		
+
 	triggerGlobal: function( s, type, args ) {
 		(s.context && s.context.url == null ? jQuery(s.context) : jQuery.event).trigger(type, args);
 	},
