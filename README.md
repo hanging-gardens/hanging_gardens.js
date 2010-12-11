@@ -10,7 +10,7 @@ A lot of effort is put in making JavaScript based RIA development easier. This i
 
 ### How does it work
 
-A new Hanging Gardens project contains four directories (behaviours, helpers, widgets and vendor) and a `Gardenfile.js` file. Here is an explanation of what should go in each directory or file.
+A new Hanging Gardens project contains four directories (behaviours, helpers, widgets and lib) and a `package.json` file. Here is an explanation of what should go in each directory or file.
 
 * `behaviours`: contains files with code that makes a webpage or parts thereof
   behave in a certain way. Think of these as controllers (as in MVC).
@@ -18,12 +18,10 @@ A new Hanging Gardens project contains four directories (behaviours, helpers, wi
   different files.
 * `widgets`: contains files with code for reusable components, like a sortable
   table for example.
-* `vendor`: contains any JS libraries/plugins that you want to use. They
-  don't have to be explicitly compatible with Hanging Gardens.
-* `Gardenfile.js`: is sort of like a manifest. It tells Hanging Gardens which
-  files need to be packaged.
+* `lib`: contains files with code that doesn't fit in any of the other directories.
+* `package.json`: is a [CommonJS/Package][cjs_package] file which is compatible with the [npm package manager][npm].
 
-Take a look at the [example][example] for more information.
+Take a look at the [examples][examples] for more information.
 
 
 ### Installation
@@ -35,69 +33,55 @@ Make sure you have [Node.js][nodejs] and [NPM][npm] installed (on OSX: `brew ins
 
 ### Building the example
 
-This will build the `Gardenfile.compiled.js` file.
+This will build a `package.js` file.
 
     git clone git://github.com/fd/hanging_gardens.js.git
     cd hanging_gardens.js
-    garden example/Gardenfile.js
+    garden examples/hello-world-js/package.json
+    # or
+    garden examples/hello-world-coffee/package.json
 
-## The Gardenfile.js file
+## The package.js file
 
-The `Gardenfile.js` file specifies what files need to be processed and how they need to be processed.
+The `package.js` file specifies the project dependencies and how the project files should be processed.
 
-### General usage
+### Format
 
-Each file type (behaviours, helpers, widgets and vendor) has its own configuration function.
+    { "type"    : "application"           // this enables the extra directories
+    , "main"    : "./behaviours/index.js" // the main behaviour
 
-    behaviours([
-      'navigation' // behaviours/navigation.js
-      ]);
-
-    helpers([
-      'base64'     // helpers/base64.js
-      ]);
-
-    widgets([
-      'table'      // widgets/table.js
-      ]);
-
-    vendor({
-      // vendor/jquery.js wrapped in the provided snippet. (__GARDEN_MODULE__
-      // gets replaced with the content of vendor/jquery.js)
-      'jquery': '__GARDEN_MODULE__ ; exports = window.jQuery;'
-      });
-
-Do note that the `vendor` configuration function is different from the others as it supports passing a wrapper snippet. The wrapper snippet is sometimes needed to shoehorn a library into the Hanging Gardens structure. When you don't want to use a wrapper snippet you can just pass `false` instead.
+    // the dependecies
+    , "dependencies" :
+      { "jquery": ">= 1.4.3"
+      }
+    }
 
 ### How to enable JSLint
 
-First you need to have [JSLint][jslint] installed (on OSX: `brew install jslint`). Then in your `Gardenfile.js` add the following line:
+In your `package.json` file add this option:
 
-    lint();
-
-If you don't want to process some files with JSLint you can use the `skip` option.
-
-    lint({ skip: ['vendor/jquery'] });
+    "lint": true
 
 
 ### How to enable YUI Compressor
 
-You need to have [YUI Compressor][yuicomp] installed (on OSX: `brew install yuicompressor`). Then in your `Gardenfile.js` add the following line:
+In your `package.json` file add this option:
 
-    yuicompressor();
+    "compression": "yui"
 
 
 ### How to use Coffee Script
 
-Make sure you have [Coffee Script][coffee] installed (`npm install coffee-script`). Then you can just create `.coffee` files.
+Just create a `.coffee` file.
 
 
-  [example]:  https://github.com/fd/hanging_gardens.js/tree/master/example/
-  [coffee]:   http://jashkenas.github.com/coffee-script/
-  [jslint]:   http://www.jslint.com/
-  [yuicomp]:  http://developer.yahoo.com/yui/compressor/
-  [jquery]:   http://jquery.com/
-  [mootools]: http://mootools.net/
-  [nodejs]:   http://nodejs.org/
-  [npm]:      http://npmjs.org/
+  [examples]:     https://github.com/fd/hanging_gardens.js/tree/master/examples/
+  [coffee]:      http://jashkenas.github.com/coffee-script/
+  [jslint]:      http://www.jslint.com/
+  [yuicomp]:     http://developer.yahoo.com/yui/compressor/
+  [jquery]:      http://jquery.com/
+  [mootools]:    http://mootools.net/
+  [nodejs]:      http://nodejs.org/
+  [npm]:         http://npmjs.org/
+  [cjs_package]: http://wiki.commonjs.org/wiki/Packages/1.0
 
