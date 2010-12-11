@@ -4,20 +4,14 @@
 , "keywords"      : ["util", "dom", "jquery"]
 , "author"        : "John Resig <jeresig@gmail.com>"
 , "contributors"  : []
-, "dependencies"  : ["jsdom","htmlparser"]
-, "main"          : "./lib/jquery-1.4.4.js"
+, "main"          : "./lib/core.js"
 , "version"       : "1.4.4"
+, "lint"          : true
+, "compression"   : "yui"
 , "engines" :
-  { "node"   : "*"
-  , "garden" : "*"
+  { "garden" : "*"
   }
-, "overlay" :
-  { "garden" :
-    { "dependencies" : []
-    , "main"         : "./garden-lib/jquery-1.4.4.js"
-    , "directories"  : { "lib": "garden-lib" }
-    , "lint"         : false
-    , "compression"  : "yui"
-    }
+, "dependencies"  : 
+  { "sizzle" : ">= 1.4.4"
   }
 }

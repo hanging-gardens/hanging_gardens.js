@@ -1,0 +1,10 @@
+{ "type"    : "application"
+, "main"    : "./behaviours/index.js"
+
+, "lint"        : true
+, "compression" : "yui"
+
+, "dependencies" :
+  { "jquery": ">= 1.4.3"
+  }
+}

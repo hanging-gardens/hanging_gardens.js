@@ -151,7 +151,7 @@ Animator.applyDefaults = function(defaults, prefs) {
 };
 // make an array from any object
 Animator.makeArray = function(o) {
-	if (o === null) {return [];}
+	if (!(o)) {return [];}
 	if (!o.length) {return [o];}
 	var result = [];
 	for (var i=0; i<o.length; i++) {result[i] = o[i];}
@@ -203,7 +203,7 @@ Animator.makeElastic = function(bounces) {
 // make an Attack Decay Sustain Release envelope that starts and finishes on the same level
 // 
 Animator.makeADSR = function(attackEnd, decayEnd, sustainEnd, sustainLevel) {
-	if (sustainLevel === null) {sustainLevel = 0.5;}
+	if (!(sustainLevel)) {sustainLevel = 0.5;}
 	return function(state) {
 		if (state < attackEnd) {
 			return state / attackEnd;
@@ -255,7 +255,7 @@ function NumericalStyleSubject(els, property, from, to, units) {
 	}
 	this.from = parseFloat(from);
 	this.to = parseFloat(to);
-	this.units = units !== null ? units : 'px';
+	this.units = units ? units : 'px';
 }
 NumericalStyleSubject.prototype = {
 	setState: function(state) {
