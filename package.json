@@ -1,5 +1,5 @@
 { "name"        : "hanging-gardens"
-, "version"     : "1.0.0"
+, "version"     : "1.0.1"
 , "author"      : "Simon Menke"
 , "description" : "A JavaScript project structure for NoRIA webpages."
 , "keywords"    :
