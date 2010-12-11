@@ -26,6 +26,7 @@
   }
 , "dependencies"    :
   { "coffee-script" : ">= 0.9.5"
+  , "watch"         : ">= 0.2.1"
   }
 , "repository" :
   { "type"     : "git"
