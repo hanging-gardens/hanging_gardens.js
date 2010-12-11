@@ -24,9 +24,10 @@
 , "bin"      :
   { "garden" : "./bin/garden"
   }
-, "dependencies"    :
-  { "coffee-script" : ">= 0.9.5"
-  , "watch"         : ">= 0.2.1"
+, "dependencies" :
+  { "coffee-script"            : ">= 0.9.5"
+  , "watch"                    : ">= 0.2.1"
+  , "hanging_gardens_registry" : ">= 1.0.0"
   }
 , "repository" :
   { "type"     : "git"
