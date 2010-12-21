@@ -1,0 +1,16 @@
+{
+  "name": "browser",
+  "description": "Browser access",
+  "version": "1.0.0",
+  "homepage": "https://github.com/fd/hanging_gardens.js",
+  "author": "Simon Menke <simon.menke@gmail.com> (https://github.com/fd)",
+  "directories": {
+    "lib": "lib"
+  },
+  "lint": true,
+  "compression": "yui",
+  "main": "./lib/index.js",
+  "engines": {
+    "garden": "*"
+  }
+}
