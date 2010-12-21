@@ -12,5 +12,8 @@
   "main": "./lib/index.js",
   "engines": {
     "garden": "*"
+  },
+  "dependencies": {
+    "es5-shim": ">= 0.0.0"
   }
 }
