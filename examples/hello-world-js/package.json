@@ -1,10 +1,12 @@
 { "type"    : "application"
-, "main"    : "./behaviours/index.js"
+, "modules" :
+  { "helpers/cool": "./behaviours/hello.js" }
 
 , "lint"        : true
 , "compression" : "yui"
 
 , "dependencies" :
   { "jquery": ">= 1.4.3"
+  , "chains": ">= 0.0.1"
   }
 }
