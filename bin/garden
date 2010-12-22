@@ -2,7 +2,7 @@
 
 var path = require('path')
 ,   fs   = require('fs')
-,   lib  = path.join(path.dirname(fs.realpathSync(__filename)), '../lib')
+,   lib  = path.join(fs.realpathSync(__dirname), '../lib')
 ;
 
 require(lib + '/command').run();
