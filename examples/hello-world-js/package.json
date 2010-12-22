@@ -1,5 +1,6 @@
 { "type"    : "application"
-, "main"    : "./behaviours/index.js"
+, "modules" :
+  { "helpers/cool": "./behaviours/hello.js" }
 
 , "lint"        : true
 , "compression" : "yui"
