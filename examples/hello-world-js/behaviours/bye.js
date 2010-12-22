@@ -1,5 +1,4 @@
 var $       = require('jquery')
-,   console = require('browser/console')
 ;
 
 exports.bye = function(who){
