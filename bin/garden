@@ -5,4 +5,4 @@ var path = require('path')
 ,   lib  = path.join(fs.realpathSync(__dirname), '../lib')
 ;
 
-require(lib + '/command').run();
+require(lib + '/command').start();
