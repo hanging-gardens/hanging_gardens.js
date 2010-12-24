@@ -7,6 +7,5 @@
 
 , "dependencies" :
   { "jquery": ">= 1.4.3"
-  , "chains": ">= 0.0.1"
   }
 }
