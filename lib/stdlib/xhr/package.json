@@ -1,6 +1,6 @@
 {
-  "name": "browser",
-  "description": "Browser access",
+  "name": "xhr",
+  "description": "XHR",
   "version": "1.0.0",
   "homepage": "https://github.com/fd/hanging_gardens.js",
   "author": "Simon Menke <simon.menke@gmail.com> (https://github.com/fd)",
@@ -9,12 +9,8 @@
   },
   "lint": true,
   "compression": "yui",
-  "main": "./lib/index.js",
+  "main": "./lib/xhr.js",
   "engines": {
     "garden": "*"
-  },
-  "dependencies": {
-    "es5-shim": ">= 0.0.0",
-    "xhr":      ">= 0.0.0"
   }
 }
