@@ -28,7 +28,7 @@ Take a look at the [examples][examples] for more information.
 
 Make sure you have [Node.js][nodejs] and [NPM][npm] installed (on OSX: `brew install npm`).
 
-    npm install hanging-gardens
+    npm install hanging-gardens -g
 
 
 ### Building the example
