@@ -30,6 +30,9 @@ Make sure you have [Node.js][nodejs] and [NPM][npm] installed (on OSX: `brew ins
 
     npm install hanging-gardens -g
 
+Next, make sure you have Yuicompressor installed
+
+    brew install yuicompressor
 
 ### Building the example
 
